@@ -10,28 +10,18 @@
 // @grant        none
 // @namespace    WMEChamferAngle
 // ==/UserScript==
-
-
-
 setTimeout(chamfer,999);
-
-
 function chamfer() {
   UpdateSegmentGeometry=require("Waze/Action/UpdateSegmentGeometry");
   Waze.selectionManager.events.register("selectionchanged", null, insertСhamferButtons);
-
   console.log("Start ChamferAngle");  
-
   function insertСhamferButtons() {
-    $('.street-actions').append('<button id="chamferAngle" class="btn btn-default">Скосить углы</button>');
+    $('.more-actions').append('<button id="chamferAngle" class="btn btn-default">Скосить углы</button>');
   }
-
   $('#sidebar').on('click', '#chamferAngle', function(event) {
     event.preventDefault();
     chamferAngle();
   });
-
-
   function getangle(A,B,C) {
     var AB = [B.x - A.x, B.y - A.y],
     CB = [B.x - C.x, B.y - C.y];
@@ -39,7 +29,6 @@ function chamfer() {
     return Math.acos((AB[0]*CB[0]+AB[1]*CB[1])/(Math.sqrt(Math.pow(AB[0], 2)+Math.pow(AB[1], 2))*Math.sqrt(Math.pow(CB[0], 2)+Math.pow(CB[1], 2))))/(Math.PI / 180);   
     
   }
-
   function chamferAngle() {
     var angle = 0,
     lengthAB = 0,
@@ -96,5 +85,3 @@ function chamfer() {
     }
   }
 }
-
-
